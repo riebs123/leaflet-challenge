@@ -6,13 +6,13 @@ d3.json(url).then(response => {
     console.log(response);
 
     // Extract feature data
-    var markers = response.features;
+    var earthquakes = response.features;
 
-    createMap(markers);
+    createMap(earthquakes);
 });
 
 
-function createMap(markers){
+function createMap(earthquakes){
     var myMap = L.map("map-id", {
         center: [40, 0],
         zoom: 2.5
@@ -27,10 +27,10 @@ function createMap(markers){
         accessToken: API_KEY
       }).addTo(myMap);
 
-    // Loop through markers to format and then add them to map
-    markers.forEach(marker => {
+    // Loop through earthquakes to format and then add them to map
+    earthquakes.forEach(marker => {
         // Format the size of the marker to reflect magnitude
-        var circleRadius = (marker.properties.mag * 30000);
+        var circleRadius = (marker.properties.mag * 25000);
         var circleDepth = marker.geometry.coordinates[2];
         var circleLocation = [marker.geometry.coordinates[1], marker.geometry.coordinates[0]];
         var popUpText = marker.properties.place;
